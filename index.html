@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Key dminh820</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background-color: #f0f2f5; padding-top: 50px; }
+        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: inline-block; max-width: 400px; }
+        button { background-color: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Hệ Thống Lấy Key</h2>
+        <p>Vui lòng nhấn nút bên dưới để vượt link nhận key sử dụng trong 24h.</p>
+        <button onclick="generateLink()">BẮT ĐẦU LẤY KEY</button>
+        <p id="msg" style="margin-top: 15px; color: #666;"></p>
+    </div>
+
+    <script>
+        const API_TOKEN = '686743fd8988f25f2e355b6c'; // Lấy từ ảnh của bạn
+        
+        function generateLink() {
+            document.getElementById('msg').innerText = "Đang khởi tạo link, vui lòng chờ...";
+            
+            // Tạo số ngẫu nhiên từ 1 đến 100 để chọn Key
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            const selectedKey = "dminh820-key" + randomNumber; // Ví dụ: dminh820-key45
+
+            // Link trang hiển thị kết quả (Thay username bằng của bạn)
+            const targetUrl = `https://YOUR_GITHUB_USER.github.io/YOUR_REPO/show.html?key=${selectedKey}`;
+            
+            // API rút gọn theo ảnh bạn cung cấp
+            const apiUrl = `https://link4m.co/api-shorten/v2?api=${API_TOKEN}&url=${encodeURIComponent(targetUrl)}`;
+
+            // Gọi API Link4M
+            fetch(apiUrl)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.status === "success") {
+                        window.location.href = data.shortenedUrl;
+                    } else {
+                        alert("Lỗi API Link4M: " + data.message);
+                    }
+                })
+                .catch(err => alert("Lỗi kết nối!"));
+        }
+    </script>
+</body>
+</html>
